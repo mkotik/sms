@@ -8,8 +8,8 @@ const client = new twilio(accountSid, authToken);
 
 client.messages
   .create({
-    body: "Yo respond to this one",
-    to: "+19084048073", // Text this number
+    body: "Hello, can I buy your houses?",
+    to: "+1 848 458 0377", // Text this number
     from: "+1 904 508 0427", // From a valid Twilio number
   })
   .then((message) => console.log(message.sid))
