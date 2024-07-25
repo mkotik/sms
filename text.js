@@ -8,7 +8,7 @@ const client = new twilio(accountSid, authToken);
 
 client.messages
   .create({
-    body: "Hello from Node.js!",
+    body: "Yo respond to this one",
     to: "+19084048073", // Text this number
     from: "+1 904 508 0427", // From a valid Twilio number
   })
