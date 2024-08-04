@@ -37,7 +37,14 @@ app.post("/sms", async (req, res) => {
   const body = req.body.Body;
 
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: body }],
+    messages: [
+      {
+        role: "system",
+        content:
+          "The user has just received the following text: 'Hello, my name is Michael Wilcox, I'm a real estate investor in the area, are you interested in selling me your home?' The following message is the user's response to this message. Your job is to respond in an appropriate manner, and if they seem interested, try to set up a zoom call with a specific date and time.",
+      },
+      { role: "user", content: body },
+    ],
     model: "gpt-4o-mini",
   });
 
