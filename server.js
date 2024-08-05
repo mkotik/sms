@@ -3,8 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const twilio = require("twilio");
 const OpenAI = require("openai");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 3000;
@@ -33,6 +36,7 @@ const conversationHistory = {
 
 // Endpoint to receive incoming SMS messages
 app.post("/sms", async (req, res) => {
+  console.log(req.body);
   const from = req.body.From;
   const body = req.body.Body;
 
@@ -41,7 +45,7 @@ app.post("/sms", async (req, res) => {
       {
         role: "system",
         content:
-          "The user has just received the following text: 'Hello, my name is Michael Wilcox, I'm a real estate investor in the area, are you interested in selling me your home?' The following message is the user's response to this message. Your job is to respond in an appropriate manner, and if they seem interested, try to set up a zoom call with a specific date and time.",
+          "The user has just received the following text: 'Hello, my name is Michael Wilcox, I'm a real estate investor in the area, are you interested in selling me your home?' The following message is the user's response to this message. Your job is to respond based on the willingness of the response. 0 means not interested, 1 means neutral, 2 means interested (even slightly). Do not respond with anything else besides the character 0, 1, or 2.",
       },
       { role: "user", content: body },
     ],

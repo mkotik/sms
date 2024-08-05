@@ -8,7 +8,7 @@ const client = new twilio(accountSid, authToken);
 
 client.messages
   .create({
-    body: "Hello, can I buy your houses?",
+    body: "Hey it's Mike, are you open to selling your house?",
     to: "+18489001244", // Text this number
     from: "+1 904 508 0427", // From a valid Twilio number
   })
