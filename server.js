@@ -20,6 +20,10 @@ const openai = new OpenAI({
   project: process.env.OPENAI_PROJ,
 });
 
+app.get("/", async (req, res) => {
+  res.status(200).json({ message: "welcome to the api" });
+});
+
 app.post("/text", async (req, res) => {
   const { phoneNumbers } = req.body;
   sendTexts(phoneNumbers);
