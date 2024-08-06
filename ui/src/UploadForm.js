@@ -1,6 +1,7 @@
 import React from "react";
 import * as XLSX from "xlsx";
 import { useState } from "react";
+import axios from "axios";
 
 const UploadForm = () => {
   const [phoneNumbers, setPhoneNumbers] = useState([]);
@@ -26,7 +27,7 @@ const UploadForm = () => {
 
   const handleSubmit = () => {
     axios
-      .post("sms-production-c788.up.railway.app/text", { phoneNumbers })
+      .post(`${process.env.REACT_APP_API_URL}/text`, { phoneNumbers })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
