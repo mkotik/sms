@@ -8,7 +8,6 @@ const sendTexts = (phoneNumbers) => {
 
   const client = new twilio(accountSid, authToken);
   const openingMessage = "Hey it's Mike, are you open to selling your house?";
-  const toNumber = "+18489001244";
   connectDB();
 
   phoneNumbers.forEach((number) => {
@@ -22,7 +21,7 @@ const sendTexts = (phoneNumbers) => {
         console.log(`Message sent to ${number}: ${message.sid}`);
 
         const newText = new Text({
-          phoneNumber: toNumber,
+          phoneNumber: number,
           textHistory: [openingMessage],
         });
 
