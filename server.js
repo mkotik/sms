@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { connectDB, Text } = require("./db");
 const OpenAI = require("openai");
 const cors = require("cors");
+const sendTexts = require("./text");
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,12 @@ const port = process.env.PORT || 3000;
 const openai = new OpenAI({
   organization: process.env.OPENAI_ORG,
   project: process.env.OPENAI_PROJ,
+});
+
+app.post("/text", async (req, res) => {
+  const { phoneNumbers } = req.body;
+  sendTexts(phoneNumbers);
+  res.status(200).json({ message: "done" });
 });
 
 // Endpoint to receive incoming SMS messages
